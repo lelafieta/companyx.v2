@@ -34,4 +34,5 @@ class AppImages {
   static const String rh = "${_imageUrl}rh.png";
   static const String employees = "${_imageUrl}employees.png";
   static const String employee = "${_imageUrl}employee.png";
+  static const String cloudyDay = "${_imageUrl}cloudy-day.png";
 }

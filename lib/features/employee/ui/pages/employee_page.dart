@@ -1,9 +1,12 @@
 import 'package:companyx/core/resources/app_icons.dart';
 import 'package:companyx/core/resources/app_images.dart';
+import 'package:companyx/features/employee/ui/widgets/carousel_first_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../config/themes/color_palette.dart';
+import '../widgets/carousel_second_widget.dart';
 
 class EmployeePage extends StatefulWidget {
   const EmployeePage({super.key});
@@ -13,6 +16,12 @@ class EmployeePage extends StatefulWidget {
 }
 
 class _EmployeePageState extends State<EmployeePage> {
+  List<Widget> carouselWidgets = [
+    CarouselFirstWidget(),
+    CarouselFirstWidget(),
+    CarouselSecondWidget(),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +31,7 @@ class _EmployeePageState extends State<EmployeePage> {
             children: [
               Container(
                 width: double.infinity,
-                height: 275,
+                height: 350,
                 decoration: const BoxDecoration(
                     // color: Colors.red,
                     ),
@@ -37,8 +46,8 @@ class _EmployeePageState extends State<EmployeePage> {
                   decoration: const BoxDecoration(
                     gradient: LinearGradient(
                       colors: [
-                        AppColors.primaryDarker,
                         AppColors.primary,
+                        AppColors.primaryDarker,
                       ],
                       begin: Alignment.topLeft, // Início do gradiente
                       end: Alignment.bottomRight, // Fim do gradiente
@@ -82,7 +91,7 @@ class _EmployeePageState extends State<EmployeePage> {
                           color: Colors.white.withOpacity(.6),
                         ),
                       ),
-                      trailing: Container(
+                      trailing: SizedBox(
                         width: 100,
                         // color: Colors.red,
                         child: Row(
@@ -90,7 +99,7 @@ class _EmployeePageState extends State<EmployeePage> {
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             IconButton(
-                              padding: EdgeInsets.all(0),
+                              padding: const EdgeInsets.all(0),
                               onPressed: () {},
                               icon: SvgPicture.asset(
                                 AppIcons.newspaper,
@@ -112,28 +121,57 @@ class _EmployeePageState extends State<EmployeePage> {
                 ),
               ),
               Positioned(
-                left: 16,
-                right: 16,
-                top: 120,
-                child: Container(
-                  height: 150,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    boxShadow: const [
-                      BoxShadow(
-                        spreadRadius: 2,
-                        blurRadius: 2,
-                        color: Colors.black12,
+                left: 0,
+                right: 0,
+                top: 110,
+                // child: Container(
+                //   height: 150,
+                //   decoration: BoxDecoration(
+                //     color: Colors.white,
+                //     boxShadow: [
+                //       BoxShadow(
+                //         spreadRadius: 2,
+                //         blurRadius: 2,
+                //         color: Colors.black12,
+                //       ),
+                //     ],
+                //   ),
+                //   ),
+                // ),
+                child: FlutterCarousel(
+                  options: FlutterCarouselOptions(
+                    height: 230.0,
+                    showIndicator: true,
+                    initialPage: 0,
+                    viewportFraction: 1,
+                    indicatorMargin: 5,
+                    floatingIndicator: false,
+                    slideIndicator: CircularSlideIndicator(
+                      slideIndicatorOptions: const SlideIndicatorOptions(
+                        indicatorBackgroundColor: AppColors.primaryLighter,
+                        currentIndicatorColor: AppColors.primary,
                       ),
-                    ],
-                    borderRadius: BorderRadius.circular(10),
+                    ),
                   ),
+                  items: [1, 2].map((i) {
+                    return Padding(
+                      padding: const EdgeInsets.only(
+                          left: 16, right: 16, top: 10, bottom: 5),
+                      child: Builder(
+                        builder: (BuildContext context) {
+                          return carouselWidgets.elementAt(i);
+                        },
+                      ),
+                    );
+                  }).toList(),
                 ),
               ),
             ],
           ),
           Expanded(
-            child: Column(),
+            child: Column(
+              children: [],
+            ),
           )
         ],
       ),
