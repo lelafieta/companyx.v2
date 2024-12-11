@@ -4,16 +4,16 @@ import 'package:get/get.dart';
 import '../config/router/pages.dart';
 import '../config/themes/themes.dart';
 
-class AputaroApp extends StatelessWidget {
-  const AputaroApp({super.key});
+class CompanyxApp extends StatelessWidget {
+  const CompanyxApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
       onGenerateRoute: Pages.onGenerateRoute,
-      title: 'Aputaro',
-      theme: AppTheme.lightTheme,
-      darkTheme: AppTheme.darkTheme,
+      title: 'CompanyX',
+      theme: AppThemes.lightTheme,
+      darkTheme: AppThemes.darkTheme,
       themeMode: ThemeMode.system,
     );
   }

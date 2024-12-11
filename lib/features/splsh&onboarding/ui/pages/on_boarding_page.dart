@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart'; // Import for SVG support
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import '../../../../config/router/routes.dart';
+import '../../../../config/themes/color_palette.dart';
+import '../../../../core/resources/app_svg.dart';
 
 class OnBoardingPage extends StatefulWidget {
   const OnBoardingPage({super.key});
@@ -9,62 +13,138 @@ class OnBoardingPage extends StatefulWidget {
 }
 
 class _OnBoardingPageState extends State<OnBoardingPage> {
-  final PageController _pageController = PageController();
+  final PageController _pageController = PageController(initialPage: 0);
   int _currentPage = 0;
 
-  final List<String> _svgImages = [
-    'assets/image1.svg', // Replace with your actual SVG asset paths
-    'assets/image2.svg',
-    'assets/image3.svg',
+  final List<Map<String, dynamic>> _onboardingData = [
+    {
+      'title': 'Inteligente & Rápido',
+      'description': 'Checkin & Checkout instantânio com apenas um click fácil',
+      'image': AppSvg.businessSupportRafiki,
+      'color': Colors.white,
+    },
+    {
+      'title': 'Gestão de projectos',
+      'description': 'lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+      'image': AppSvg.businessAnalyticsRafiki,
+      'color': Colors.white,
+    },
+    {
+      'title': 'Verificação de presenças & Gestão de mudanças',
+      'description': 'Vamos começar a usar o aplicativo.',
+      'image': AppSvg.togetherPana,
+      'color': Colors.white,
+    },
   ];
 
-  final List<String> _titles = [
-    'Title 1', // Replace with your actual titles
-    'Title 2',
-    'Title 3',
-  ];
+  Future<void> _completeOnboarding() async {
+    // SharedPreferences prefs = await SharedPreferences.getInstance();
+    // await prefs.setBool('onboardingComplete', true);
+    // // Navigator.pushReplacementNamed(context, '/home');
 
-  final List<String> _descriptions = [
-    'Description 1', // Replace with your actual descriptions
-    'Description 2',
-    'Description 3',
-  ];
+    setState(() {
+      _currentPage = 2;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        // Ensures content doesn't overlap status bar
-        child: Column(
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      body: Stack(
+        children: [
+          Column(
+            children: <Widget>[
+              Expanded(
+                child: PageView.builder(
+                  controller: _pageController,
+                  onPageChanged: (index) {
+                    setState(() {
+                      _currentPage = index;
+                    });
+                  },
+                  itemCount: _onboardingData.length,
+                  itemBuilder: (context, index) => OnboardingContent(
+                    title: _onboardingData[index]['title']!,
+                    description: _onboardingData[index]['description']!,
+                    image: _onboardingData[index]['image']!,
+                    color: _onboardingData[index]['color']!,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: _buildBottomSection(),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildBottomSection() {
+    return Container(
+      color: Theme.of(context).scaffoldBackgroundColor,
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Expanded(
-              child: PageView.builder(
-                controller: _pageController,
-                itemCount: _svgImages.length,
-                onPageChanged: (int page) {
-                  setState(() {
-                    _currentPage = page;
-                  });
-                },
-                itemBuilder: (context, index) {
-                  return OnboardingItem(
-                    svgAsset: _svgImages[index],
-                    title: _titles[index],
-                    description: _descriptions[index],
-                  );
-                },
+            TextButton(
+              style: const ButtonStyle(
+                  // backgroundColor: MaterialStatePropertyAll(
+                  //   AppColors.grey,
+                  // ),
+                  ),
+              onPressed: () {
+                _pageController.jumpToPage(2);
+                _completeOnboarding();
+              },
+              child: Text(
+                "Pular",
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onSurface,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: List<Widget>.generate(
-                _svgImages.length,
+              children: List.generate(
+                _onboardingData.length,
                 (index) => _buildDot(index),
               ),
             ),
-            SizedBox(
-              height: 20,
-            ), // Spacing between dots and button
+            TextButton(
+              style: const ButtonStyle(
+                backgroundColor: WidgetStatePropertyAll(
+                  AppColors.primary,
+                ),
+                foregroundColor: WidgetStatePropertyAll(
+                  AppColors.primary,
+                ),
+              ),
+              onPressed: () {
+                if (_currentPage == 2) {
+                  Get.toNamed(Routes.getStartedRoute);
+                } else if (_currentPage == _onboardingData.length - 1) {
+                  _completeOnboarding();
+                } else {
+                  _pageController.nextPage(
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.ease,
+                  );
+                }
+              },
+              child: Text(
+                _currentPage == _onboardingData.length - 1
+                    ? "Começar"
+                    : "Próximo",
+                style: const TextStyle(color: Colors.white),
+              ),
+            ),
           ],
         ),
       ),
@@ -72,58 +152,60 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
   }
 
   Widget _buildDot(int index) {
-    return AnimatedContainer(
-      duration: const Duration(milliseconds: 200),
-      margin: const EdgeInsets.symmetric(horizontal: 4.0),
-      height: 8.0,
-      width: _currentPage == index ? 24.0 : 8.0,
+    return Container(
+      margin: const EdgeInsets.only(right: 8.0),
+      height: 10,
+      width: _currentPage == index ? 20 : 10,
       decoration: BoxDecoration(
-        color: _currentPage == index ? Colors.blue : Colors.grey,
-        borderRadius: BorderRadius.circular(4.0),
+        color: _currentPage == index
+            ? Theme.of(context).colorScheme.onSurface
+            : Colors.grey.withOpacity(.5),
+        borderRadius: BorderRadius.circular(10),
       ),
     );
   }
 }
 
-class OnboardingItem extends StatelessWidget {
-  final String svgAsset;
-  final String title;
-  final String description;
+class OnboardingContent extends StatelessWidget {
+  final String title, description, image;
+  final Color color;
 
-  const OnboardingItem({
-    Key? key,
-    required this.svgAsset,
+  const OnboardingContent({
+    super.key,
     required this.title,
     required this.description,
-  }) : super(key: key);
+    required this.image,
+    required this.color,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        mainAxisAlignment:
-            MainAxisAlignment.center, // Center content vertically
-        crossAxisAlignment:
-            CrossAxisAlignment.center, // Center content horizontally
-        children: [
-          SvgPicture.asset(
-            svgAsset,
-            height: 200, // Adjust height as needed
-          ),
-          const SizedBox(height: 20),
-          Text(
-            title,
-            style: Theme.of(context).textTheme.headlineMedium,
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: 10),
-          Text(
-            description,
-            style: Theme.of(context).textTheme.bodyMedium,
-            textAlign: TextAlign.center,
-          ),
-        ],
+    return Scaffold(
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      body: Padding(
+        padding: const EdgeInsets.all(15),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            SvgPicture.asset(image),
+            const SizedBox(height: 30),
+            Text(
+              title,
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+                color: Theme.of(context).colorScheme.onSurface,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 10),
+            Text(
+              description,
+              textAlign: TextAlign.center,
+              style: const TextStyle(),
+            ),
+          ],
+        ),
       ),
     );
   }

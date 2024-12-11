@@ -28,4 +28,10 @@ class AppImages {
   static const String cake3 = "${_imageUrl}cake3.jpg";
   static const String cake4 = "${_imageUrl}cake4.jpg";
   static const String cake5 = "${_imageUrl}cake5.jpg";
+
+  ///NEW PROJECT
+  static const String logo = "${_imageUrl}logo.png";
+  static const String rh = "${_imageUrl}rh.png";
+  static const String employees = "${_imageUrl}employees.png";
+  static const String employee = "${_imageUrl}employee.png";
 }
