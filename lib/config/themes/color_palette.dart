@@ -10,7 +10,8 @@ class AppColors {
   static const Color primaryLighter = Color(0xFFBEB7FF); // Mais claro
   static const Color primaryLightest = Color(0xFFDCD7FF); // Mais claro ainda
 
-  static const Color secondary = Color(0xFFbcaeff);
+  // #041f3f
+  static const Color secondary = Color(0xFF041f3f);
 
   // Neutral Colors (Black and Grey Shades)
   static const Color neutralDark = Color(0xFF333333); // Blackish

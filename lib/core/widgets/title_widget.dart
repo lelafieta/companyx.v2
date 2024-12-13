@@ -10,10 +10,8 @@ class TitleWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: AppSizes.s15,
-        vertical: AppSizes.s10,
-      ),
+      padding: const EdgeInsets.only(
+          left: AppSizes.s16, right: AppSizes.s10, top: 20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

@@ -11,21 +11,21 @@ class AppThemes {
     fontFamily: AppStrings.primaryFontFamily,
     useMaterial3: true,
     scaffoldBackgroundColor: Colors.white,
-    shadowColor: AppColors.neutralMedium,
+    // shadowColor: AppColors.neutralMedium,
     colorScheme: const ColorScheme.light(
       primary: AppColors.primary,
       secondary: AppColors.primaryDarker,
-      surface: AppColors.primaryLight,
+      surface: Colors.white,
       background: AppColors.primaryLighter,
     ),
     appBarTheme: const AppBarTheme(
-      backgroundColor: AppColors.primaryLightest,
+      backgroundColor: Colors.white,
       toolbarHeight: AppSizes.s80,
       titleTextStyle: TextStyle(
-        fontFamily: AppStrings.primaryFontFamily,
-        fontSize: AppSizes.s18,
-        fontWeight: FontWeight.bold,
-      ),
+          fontFamily: AppStrings.primaryFontFamily,
+          fontSize: AppSizes.s18,
+          fontWeight: FontWeight.bold,
+          color: AppColors.neutralDark),
       centerTitle: true,
     ),
     textTheme: const TextTheme(
@@ -73,9 +73,9 @@ class AppThemes {
       ),
       bodyLarge: TextStyle(
         fontFamily: AppStrings.primaryFontFamily,
-        fontWeight: FontWeight.normal, // Normal é 400, padrão para bodyLarge
-        fontSize: 16, // Ajuste para refletir padrão do M3
-        height: 1.5, // Altura padrão para bodyLarge
+        // fontWeight: FontWeight.bold,
+        fontSize: 16,
+        height: 1.5,
         color: AppColors.neutralDark,
       ),
       bodyMedium: TextStyle(
@@ -116,9 +116,10 @@ class AppThemes {
     ),
     inputDecorationTheme: InputDecorationTheme(
       border: OutlineInputBorder(
-        borderSide: const BorderSide(
-          color: AppColors.neutralMedium,
-        ), // Borda preta fosca
+        // borderSide: const BorderSide(
+        //     // color: AppColors.neutralMedium,
+        //     ), // Borda preta fosca
+        borderSide: BorderSide.none,
         borderRadius: BorderRadius.circular(5),
       ),
       filled: true,
@@ -128,10 +129,7 @@ class AppThemes {
         vertical: 8,
       ),
       enabledBorder: OutlineInputBorder(
-        borderSide: const BorderSide(
-          width: .5,
-          color: AppColors.neutralMedium,
-        ),
+        borderSide: BorderSide.none,
         borderRadius: BorderRadius.circular(10),
       ),
       focusedBorder: OutlineInputBorder(
@@ -143,14 +141,14 @@ class AppThemes {
       ),
       errorBorder: OutlineInputBorder(
         borderSide: const BorderSide(
-          color: AppColors.neutralMedium,
+          // color: AppColors.neutralMedium,
           width: .5,
         ), // Borda preta fosca
         borderRadius: BorderRadius.circular(10),
       ),
       focusedErrorBorder: OutlineInputBorder(
         borderSide: const BorderSide(
-          color: AppColors.neutralMedium,
+          // color: AppColors.neutralMedium,
           width: .5,
         ), // Borda preta fosca
         borderRadius: BorderRadius.circular(10),
@@ -224,7 +222,7 @@ class AppThemes {
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        backgroundColor: AppColors.primaryLight, // Botão principal
+        backgroundColor: AppColors.primary, // Botão principal
         foregroundColor: Colors.white,
       ),
     ),
@@ -237,7 +235,7 @@ class AppThemes {
       ), // Texto secundário
     ),
     inputDecorationTheme: const InputDecorationTheme(
-      fillColor: AppColors.neutralMedium,
+      // fillColor: AppColors.neutralMedium,
       filled: true,
       border: OutlineInputBorder(
         borderSide: BorderSide(color: AppColors.neutralLight),
