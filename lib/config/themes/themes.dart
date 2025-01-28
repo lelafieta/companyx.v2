@@ -160,18 +160,18 @@ class AppThemes {
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
-        backgroundColor: const WidgetStatePropertyAll(AppColors.primary),
-        foregroundColor: const WidgetStatePropertyAll(Colors.white),
-        minimumSize: const WidgetStatePropertyAll(
+        backgroundColor: const MaterialStatePropertyAll(AppColors.primary),
+        foregroundColor: const MaterialStatePropertyAll(Colors.white),
+        minimumSize: const MaterialStatePropertyAll(
           Size(double.maxFinite, 50),
         ),
-        shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+        shape: MaterialStatePropertyAll<RoundedRectangleBorder>(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
         ),
-        textStyle: WidgetStateProperty.all<TextStyle>(
-          const TextStyle(
+        textStyle: const MaterialStatePropertyAll<TextStyle>(
+          TextStyle(
             fontSize: 16.0,
             fontFamily: AppStrings.primaryFontFamily,
             fontWeight: FontWeight.bold,
@@ -182,21 +182,21 @@ class AppThemes {
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: ButtonStyle(
         minimumSize:
-            const WidgetStatePropertyAll(Size(double.infinity, AppSizes.s50)),
-        foregroundColor: const WidgetStatePropertyAll(AppColors.primary),
-        side: WidgetStateProperty.all(
-          const BorderSide(
+            const MaterialStatePropertyAll(Size(double.infinity, AppSizes.s50)),
+        foregroundColor: const MaterialStatePropertyAll(AppColors.primary),
+        side: const MaterialStatePropertyAll(
+          BorderSide(
             color: AppColors.primary, // Cor da borda
             width: .5, // Largura da borda
           ),
         ),
-        shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+        shape: MaterialStatePropertyAll<RoundedRectangleBorder>(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
         ),
-        textStyle: WidgetStateProperty.all<TextStyle>(
-          const TextStyle(
+        textStyle: const MaterialStatePropertyAll<TextStyle>(
+          TextStyle(
             fontSize: 16.0,
             fontFamily: AppStrings.primaryFontFamily,
             fontWeight: FontWeight.bold,

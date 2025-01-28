@@ -119,10 +119,10 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
             ),
             TextButton(
               style: const ButtonStyle(
-                backgroundColor: WidgetStatePropertyAll(
+                backgroundColor: MaterialStatePropertyAll(
                   AppColors.primary,
                 ),
-                foregroundColor: WidgetStatePropertyAll(
+                foregroundColor: MaterialStatePropertyAll(
                   AppColors.primary,
                 ),
               ),
