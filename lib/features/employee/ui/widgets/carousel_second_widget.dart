@@ -3,7 +3,6 @@ import 'package:companyx/core/resources/app_images.dart';
 import 'package:dismissible_page/dismissible_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 
 import '../../../../core/resources/app_icons.dart';
 
